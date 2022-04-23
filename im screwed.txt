@@ -7,3 +7,15 @@ ai
 Shooter
 Bullets (upgradable)
 dear god pls help
+
+
+= Walls
+= Enemies
+= Difficulty setting 
+= Start menu end menu
+= swal + buttons
+= [Start]  -  [Difficulty]
+= powerups
+= lives, points
+= bg changes  - scam level
+= 
