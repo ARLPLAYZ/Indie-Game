@@ -18,4 +18,8 @@ dear god pls help
 = powerups
 = lives, points
 = bg changes  - scam level
-= 
+
+
+= Sounds
+= new level
+= start menu (optional)

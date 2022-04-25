@@ -58,6 +58,7 @@ function shootBullet() {
     }
     bullet.scale = 0.1;
     bullet.lifetime = 150;
+    bullets.push(bullet);
 
 
     
@@ -72,18 +73,18 @@ function randomTrueFalse() {
 function sleep(ms) {
     return new Promise(res=> setTimeout(res(), ms))
 }
-async function enemySpawn() {
-
-    while(enemies.length < 5) {
+function enemySpawn() {
+    while (enemies.length < 5) {
+        console.log('aa');
         const enemy = createSprite(random(windowWidth/2), random(windowHeight/2), 20, 20);
         enemy.addImage('b',loadImage('images/ugly.png'))
         enemy.scale = 0.07;
         enemy.friction = 0.5;
         enemy.attractionPoint(2, player.position.x, player.position.y)
         enemies.push(enemy);
-
-        
+        console.log(enemies.length);       
     }
+    
     // const enemy = createSprite(random(windowWidth/2), random(windowHeight/2), 20, 20);
    /* let velocityY;
     velocityX ? velocityY = 0 : velocityY = 1;

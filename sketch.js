@@ -7,6 +7,7 @@ let lvl1;
 let enemies = [];
 let bullets = [];
 let coolDown = Date.now();
+let urMeaslyScore;
 function preload() {
     bgImg = loadImage('./images/lv2.png');
     leftI = loadImage('./images/left.png');
@@ -29,7 +30,7 @@ function setup() {
     player.addImage('b', bottomI);
     player.debug = true;
     mountain = createSprite(windowWidth / 2 , windowHeight -10,10,10);
-   
+    urMeaslyScore = 0;
 
     
 
@@ -39,19 +40,50 @@ function draw() {
     background(lvl1);  
     controls(player);
     checkIfOutsideBorder(); 
-    enemySpawn();
 
-        for (const enemy of enemies) {
-            
+    if (!enemies.length)  {
+        console.log('breh');
+        enemySpawn();
+    }
+    //console.log(bullets.length);
+
+        for (const enemy of enemies) {            
             enemy.friction = 0.5;
             enemy.attractionPoint(1.5, player.position.x, player.position.y);
-            if (bullet) continue;
+            if (bullets.length) {
+                 for (const bullet of bullets) {
+                    if (bullet.isTouching(enemy)) {
+                        deleteBullet(bullets, bullet);
+                        deleteBullet(enemies, enemy);
+
+                    }
+                    
+                }
+
+
+            }
             if (enemy.isTouching(player)) {
-                enemy.destroy();
                 player.destroy();
-            }           
+                enemies.forEach(e=>{e.destroy()});
+                //swal("Restart?", { button: 'YEA', });
+                swal({
+                    title: 'Restart?',
+                    text: 'Restart?'
+                }, function() {
+                    console.log('aa');
+                })//.then((value) => { swal(`The returned value is: ${value}`); });
+            }
+        /*for (var num=0 ; num < enemies.length ;num++) { 
+            if(enemies[num].isTouching(player)) {
+                swal({
+                    icon: 'Game Over',
+                    title: 'Well, you have failed',
+                    text: 'The red ragers were too good for you!',
+                })
+            }*/
+            
         }
-        for (const e of enemies) {
+        /*for (const e of enemies) {
             const eGroup = new Group();
             const bGroup = new Group();
             eGroup.add(e);
@@ -61,13 +93,12 @@ function draw() {
                 if (bGroup.collide(eGroup)) {
                     bGroup.destroyEach();
                 }
-            }
-        }
+            }            
+        }*/
     /*
     e.friction = 0.5;
     e.attractionPoint(2, player.position.x, player.position.y);
-    */
-   
+    */   
     drawSprites();
 }
 function keyPressed() {
@@ -87,4 +118,13 @@ function keyPressed() {
         player.changeImage('b');
     }
 }
+
+function deleteBullet(array, bullet) {
+    const indexOf = array.find(e =>e === bullet);
+    if (!indexOf) return;
+    const index = array.indexOf(indexOf);
+    array.splice(index, 1);
+    bullet.destroy();
+    console.log('len', array.length, 'index', indexOf)
+};
 
