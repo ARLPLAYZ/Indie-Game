@@ -8,7 +8,7 @@ function controls(player) {
     if (keyDown(38)) player.y = player.y -3;
     if (keyDown(39)) player.x = player.x + 3;
     if (keyDown(40)) player.y = player.y + 3;
-    if (keyDown('space')) shootBullet();
+    if (keyDown('space') && magnit !== 0) shootBullet();
 }
 function generateObstacle() {
     const obstacle = createSprite(random(windowWidth), random(windowHeight), random(100), random(300));
@@ -75,14 +75,16 @@ function sleep(ms) {
 }
 function enemySpawn() {
     while (enemies.length < 5) {
-        console.log('aa');
-        const enemy = createSprite(random(windowWidth/2), random(windowHeight/2), 20, 20);
+        let x = random(windowWidth-100);
+        let y = random(windowHeight-100);
+        if (x < player.x + 50 && x > player.x -50 ){ x = x + 100; y = y + 100}
+        const enemy = createSprite(random(windowWidth-100), random(windowHeight-100), 20, 20);
         enemy.addImage('b',loadImage('images/ugly.png'))
         enemy.scale = 0.07;
         enemy.friction = 0.5;
         enemy.attractionPoint(2, player.position.x, player.position.y)
         enemies.push(enemy);
-        console.log(enemies.length);       
+        setTimeout(()=>magnit = 1.5, 2e3)
     }
     
     // const enemy = createSprite(random(windowWidth/2), random(windowHeight/2), 20, 20);

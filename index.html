@@ -1,5 +1,6 @@
 <!DOCTYPE html>
  <html><head>
+  <audio id="moosic" src="images/weeee.mp3"></audio>
     <script src="lib/p5.js"></script>
     <script src="lib/p5.dom.min.js"></script>
     <script src="lib/p5.sound.min.js"></script>
@@ -18,6 +19,14 @@
 
   </head>
   <body>
+
+      <!--<img id="button1" src="images/sound.png"> -->
+      <audio src="images/weeee.mp3" muted='muted' id = 'moosic'></audio>
+      <script>
+        const e = document.getElementById('moosic').play();
+        e.volume = 0.1;
+        e.play();        
+      </script>
       <script src="js/utils.js"></script>
       <script src="sketch.js"></script>
 </body></html>
