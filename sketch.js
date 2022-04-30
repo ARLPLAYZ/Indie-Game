@@ -23,7 +23,7 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(windowWidth - 300, windowHeight - 100);
+    createCanvas(windowWidth, windowHeight);
     playButtonS = createSprite(width/2, height/2, 50, 50);
     playButtonS.visible = false;
     player = createPlayer();
